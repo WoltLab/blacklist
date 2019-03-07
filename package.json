@@ -1,0 +1,31 @@
+{
+  "name": "blacklist",
+  "version": "5.2.0",
+  "description": "Reads and processes the data from stopforumspam.com, optimizing it for efficient delta upgrades.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -w",
+    "lint": "tslint -c tslint.json -p tsconfig.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alexander Ebert",
+  "license": "LGPL-2.1-or-later",
+  "dependencies": {
+    "adm-zip": "^0.4.13",
+    "csv-parse": "^4.3.3",
+    "minimist": "^1.2.0",
+    "node-fetch": "^2.3.0",
+    "reflect-metadata": "^0.1.13",
+    "sqlite3": "^4.0.6",
+    "typedi": "^0.8.0"
+  },
+  "devDependencies": {
+    "@types/adm-zip": "^0.4.32",
+    "@types/csv-parse": "^1.1.12",
+    "@types/minimist": "^1.2.0",
+    "@types/node-fetch": "^2.1.6",
+    "@types/sqlite3": "^3.1.4",
+    "tslint": "^5.13.0",
+    "typescript": "^3.3.3333"
+  }
+}
