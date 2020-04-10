@@ -11,21 +11,21 @@
   "author": "Alexander Ebert",
   "license": "LGPL-2.1-or-later",
   "dependencies": {
-    "adm-zip": "^0.4.13",
-    "csv-parse": "^4.3.3",
-    "minimist": "^1.2.0",
-    "node-fetch": "^2.3.0",
+    "adm-zip": "^0.4.14",
+    "csv-parse": "^4.8.8",
+    "minimist": "^1.2.5",
+    "node-fetch": "^2.6.0",
     "reflect-metadata": "^0.1.13",
-    "sqlite3": "^4.0.6",
+    "sqlite3": "^4.1.1",
     "typedi": "^0.8.0"
   },
   "devDependencies": {
     "@types/adm-zip": "^0.4.32",
-    "@types/csv-parse": "^1.1.12",
+    "@types/csv-parse": "^1.2.2",
     "@types/minimist": "^1.2.0",
-    "@types/node-fetch": "^2.1.6",
-    "@types/sqlite3": "^3.1.4",
-    "tslint": "^5.13.0",
-    "typescript": "^3.3.3333"
+    "@types/node-fetch": "^2.5.5",
+    "@types/sqlite3": "^3.1.6",
+    "tslint": "^6.1.1",
+    "typescript": "^3.8.3"
   }
 }
