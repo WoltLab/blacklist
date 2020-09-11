@@ -1,4 +1,4 @@
-import { createHash, Hash } from 'crypto';
+import { createHash } from 'crypto';
 import * as csvParse from 'csv-parse';
 import { Service } from 'typedi';
 
