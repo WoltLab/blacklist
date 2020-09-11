@@ -58,7 +58,8 @@ export class Blacklist {
     await this.db.each(
       `SELECT * FROM ${
         this.tableName
-      } WHERE lastSeen BETWEEN ${timestampStart} AND ${timestampEnd}`,
+      } WHERE lastSeen BETWEEN ${timestampStart} AND ${timestampEnd}
+      ORDER BY hash`,
       (err: Error, row: IBlacklistItem): void => {
         // Discard the value for 'lastSeen', the client can implicitly use the timestamp
         // when it has fetched them. The loss of resolution is very well acceptable and
