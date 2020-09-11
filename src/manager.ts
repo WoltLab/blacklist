@@ -5,7 +5,7 @@ import { Inject, Service } from 'typedi';
 import { promisify } from 'util';
 
 import { Archive } from './archive';
-import { Blacklist, IBlacklistItem } from './blacklist';
+import { Blacklist } from './blacklist';
 import { BlacklistIndex } from './blacklist-index';
 import { Database } from './database';
 
