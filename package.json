@@ -16,7 +16,7 @@
     "minimist": "^1.2.5",
     "node-fetch": "^2.6.1",
     "reflect-metadata": "^0.1.13",
-    "sqlite3": "^4.1.1",
+    "sqlite3": "^5.0.0",
     "typedi": "^0.8.0"
   },
   "devDependencies": {
