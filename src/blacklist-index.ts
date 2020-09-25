@@ -9,10 +9,7 @@ const fsUnlink = promisify(fs.unlink);
 const fsWriteFile = promisify(fs.writeFile);
 
 export class BlacklistIndex {
-  constructor(
-    protected readonly now: Date,
-    protected readonly outDir: string,
-  ) {}
+  constructor(protected readonly now: Date, protected readonly outDir: string) {}
 
   public async rebuild(): Promise<void> {
     const validDates: string[] = [];
@@ -29,10 +26,7 @@ export class BlacklistIndex {
     await Promise.all(
       (await fsReaddir(this.outDir)).map(
         async (directory: string): Promise<void> => {
-          if (
-            /^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$/.exec(directory) &&
-            (await fsStat(path.join(this.outDir, directory))).isDirectory()
-          ) {
+          if (/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$/.exec(directory) && (await fsStat(path.join(this.outDir, directory))).isDirectory()) {
             if (validDates.indexOf(directory) === -1) {
               removeDirectories.push(directory);
 
@@ -47,8 +41,8 @@ export class BlacklistIndex {
                   if (file === 'full.json' || /^delta\-[1-4]\.json$/) {
                     files.push(file);
                   }
-                },
-              ),
+                }
+              )
             );
 
             if (files.length) {
@@ -64,27 +58,22 @@ export class BlacklistIndex {
               });
             }
           }
-        },
-      ),
-    );
-
-    data = data.sort(
-      (a: IBlacklistIndexEntry, b: IBlacklistIndexEntry): number => {
-        const aTime = new Date(a.date).getTime();
-        const bTime = new Date(b.date).getTime();
-
-        if (aTime === bTime) {
-          return 0;
-        } else {
-          return aTime > bTime ? -1 : 1;
         }
-      },
+      )
     );
 
-    await fsWriteFile(
-      path.join(this.outDir, 'index.json'),
-      JSON.stringify(data, null, 2),
-    );
+    data = data.sort((a: IBlacklistIndexEntry, b: IBlacklistIndexEntry): number => {
+      const aTime = new Date(a.date).getTime();
+      const bTime = new Date(b.date).getTime();
+
+      if (aTime === bTime) {
+        return 0;
+      } else {
+        return aTime > bTime ? -1 : 1;
+      }
+    });
+
+    await fsWriteFile(path.join(this.outDir, 'index.json'), JSON.stringify(data, null, 2));
 
     await this.cleanup(removeDirectories);
   }
@@ -95,16 +84,16 @@ export class BlacklistIndex {
         async (directory: string): Promise<void> => {
           const dirPath = path.join(this.outDir, directory);
           await Promise.all(
-            (await fsReaddir(directory)).map(
+            (await fsReaddir(dirPath)).map(
               async (file: string): Promise<void> => {
                 await fsUnlink(path.join(dirPath, file));
-              },
-            ),
+              }
+            )
           );
 
           await fsRmdir(dirPath);
-        },
-      ),
+        }
+      )
     );
   }
 }
