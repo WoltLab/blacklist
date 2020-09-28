@@ -184,16 +184,23 @@ export class Manager {
       meta,
     };
 
-    await Promise.all(
+    const entries = await Promise.all(
       blacklists.map(
-        async (blacklist: Blacklist): Promise<void> => {
-          data[blacklist.type] = await blacklist.getRows(
-            new Date(start).getTime(),
-            new Date(end).getTime(),
-          );
+        async (blacklist: Blacklist): Promise<any> => {
+          return {
+            blacklist,
+            rows: blacklist.getRows(
+              new Date(start).getTime(),
+              new Date(end).getTime(),
+            )
+          };
         },
       ),
     );
+
+    entries.forEach(entry => {
+      data[entry.blacklist.type] = entry.rows
+    });
 
     const directory = path.dirname(filename);
     if (!(await fsExists(directory))) {
