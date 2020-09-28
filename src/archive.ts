@@ -1,13 +1,13 @@
-import * as AdmZip from 'adm-zip';
 import fetch from 'node-fetch';
+import * as zlib from 'zlib';
 
 export const sources = new Map<string, string>([
-  ['ipv4', 'https://www.stopforumspam.com/downloads/listed_ip_1_all.zip'],
-  ['ipv6', 'https://www.stopforumspam.com/downloads/listed_ip_1_ipv6_all.zip'],
-  ['email', 'https://www.stopforumspam.com/downloads/listed_email_1_all.zip'],
+  ['ipv4', 'https://www.stopforumspam.com/downloads/listed_ip_1_all.gz'],
+  ['ipv6', 'https://www.stopforumspam.com/downloads/listed_ip_1_ipv6_all.gz'],
+  ['email', 'https://www.stopforumspam.com/downloads/listed_email_1_all.gz'],
   [
     'username',
-    'https://www.stopforumspam.com/downloads/listed_username_1_all.zip',
+    'https://www.stopforumspam.com/downloads/listed_username_1_all.gz',
   ],
 ]);
 
@@ -33,16 +33,11 @@ export class Archive {
   }
 
   public async download(): Promise<Buffer | undefined> {
-    const response = await fetch(sources.get(this.type));
+    const response = await fetch(sources.get(this.type), {
+      compress: false,
+    });
     if (response.ok) {
-      const entries: AdmZip.IZipEntry[] = new AdmZip(
-        await response.buffer(),
-      ).getEntries();
-      for (let i = 0, length = entries.length; i < length; i++) {
-        if (/^listed_.+_all\.txt$/.exec(entries[i].name)) {
-          return entries[i].getData();
-        }
-      }
+      return zlib.gunzipSync(await response.buffer());
     }
 
     return undefined;
