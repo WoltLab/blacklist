@@ -189,7 +189,7 @@ export class Manager {
         async (blacklist: Blacklist): Promise<any> => {
           return {
             blacklist,
-            rows: blacklist.getRows(
+            rows: await blacklist.getRows(
               new Date(start).getTime(),
               new Date(end).getTime(),
             )
