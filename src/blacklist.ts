@@ -23,6 +23,12 @@ export class Blacklist {
         this.tableName
       } (hash);`,
     );
+
+    await this.db.exec(
+      `CREATE INDEX IF NOT EXISTS lastSeen_${this.type} ON ${
+        this.tableName
+      } (lastSeen);`,
+    );
   }
 
   public async upsert(buffer: Buffer): Promise<void> {
@@ -66,6 +72,12 @@ export class Blacklist {
     );
 
     return data;
+  }
+
+  public async garbageCollect(): Promise<void> {
+    const statement = await this.db.prepare(`DELETE FROM ${this.tableName} WHERE lastSeen < ?`);
+    // Delete entries older than 30 days.
+    await statement.run(Date.now() - 86400_000 * 30);
   }
 
   protected get tableName(): string {
