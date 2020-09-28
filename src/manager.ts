@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as minimist from 'minimist';
 import * as path from 'path';
-import { Inject, Service } from 'typedi';
+import { Service } from 'typedi';
 import { promisify } from 'util';
 
 import { Archive } from './archive';
@@ -25,12 +25,14 @@ export class Manager {
   protected readonly outDir: string;
   protected readonly yesterday: Date;
 
-  @Inject()
   protected db: Database;
 
   constructor() {
     const argv = minimist(process.argv.slice(2), {
-      string: ['out-dir'],
+      string: ['out-dir', 'db-name'],
+      default: {
+        'db-name': path.join(__dirname, 'data.db')
+      },
       unknown: (): boolean => false,
     });
 
@@ -38,6 +40,8 @@ export class Manager {
     if (!this.outDir) {
       throw new Error("The '--out-dir' argument is missing.");
     }
+
+    this.db = new Database(argv['db-name']);
 
     this.now = new Date();
     this.yesterday = new Date(this.now.getTime());
@@ -96,7 +100,7 @@ export class Manager {
       await Promise.all(
         Archive.getAll().map(
           async (archive: Archive): Promise<void> => {
-            const blacklist = new Blacklist(archive.type);
+            const blacklist = new Blacklist(archive.type, this.db);
             blacklists.push(blacklist);
 
             await blacklist.setup();

@@ -1,4 +1,3 @@
-import * as path from 'path';
 import { Database as SqliteDatabase, RunResult } from 'sqlite3';
 import { Service } from 'typedi';
 
@@ -8,8 +7,8 @@ import { DatabaseStatement } from './database-statement';
 export class Database {
   protected db: SqliteDatabase;
 
-  constructor() {
-    this.db = new SqliteDatabase(path.join(__dirname, 'data.db'));
+  constructor(path: string) {
+    this.db = new SqliteDatabase(path);
   }
 
   public async setup(): Promise<void> {

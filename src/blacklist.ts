@@ -5,15 +5,11 @@ import { Database } from './database';
 
 @Service()
 export class Blacklist {
-  protected get db(): Database {
-    return Container.get(Database);
-  }
-
   protected get parser(): CsvParser {
     return Container.get(CsvParser);
   }
 
-  constructor(public readonly type: string) {}
+  constructor(public readonly type: string, private db: Database) {}
 
   public async setup(): Promise<void> {
     await this.db.exec(`CREATE TABLE IF NOT EXISTS ${this.tableName} (
