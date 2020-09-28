@@ -11,7 +11,6 @@
   "author": "Alexander Ebert",
   "license": "LGPL-2.1-or-later",
   "dependencies": {
-    "adm-zip": "^0.4.16",
     "csv-parse": "^4.12.0",
     "minimist": "^1.2.5",
     "node-fetch": "^2.6.1",
@@ -20,7 +19,6 @@
     "typedi": "^0.8.0"
   },
   "devDependencies": {
-    "@types/adm-zip": "^0.4.33",
     "@types/csv-parse": "^1.2.2",
     "@types/minimist": "^1.2.0",
     "@types/node-fetch": "^2.5.7",
