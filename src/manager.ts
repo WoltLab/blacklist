@@ -146,6 +146,15 @@ export class Manager {
       );
     }
 
+    try {
+      await blacklist.garbageCollect();
+    } catch (e) {
+      console.error(
+        `Failed to garbage collect the data for '${blacklist.type}': ${e.message}`,
+        e.stack,
+      );
+    }
+
     return blacklist;
   }
 
