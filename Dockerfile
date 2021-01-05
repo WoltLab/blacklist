@@ -14,6 +14,8 @@ RUN	node_modules/.bin/tsc
 
 FROM	node:14
 
+LABEL	org.opencontainers.image.source https://github.com/WoltLab/blacklist
+
 RUN	mkdir -p /usr/src/app/
 
 WORKDIR	/usr/src/app
