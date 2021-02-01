@@ -16,7 +16,7 @@
     "node-fetch": "^2.6.1",
     "reflect-metadata": "^0.1.13",
     "sqlite3": "^5.0.0",
-    "typedi": "^0.8.0"
+    "typedi": "^0.10.0"
   },
   "devDependencies": {
     "@types/csv-parse": "^1.2.2",
