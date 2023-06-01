@@ -1,4 +1,4 @@
-FROM	node:16 AS builder
+FROM	node:18 AS builder
 
 RUN	mkdir -p /usr/src/app/
 
@@ -12,7 +12,7 @@ COPY	. /usr/src/app/
 
 RUN	node_modules/.bin/tsc
 
-FROM	node:16
+FROM	node:18
 
 LABEL	org.opencontainers.image.source https://github.com/WoltLab/blacklist
 
