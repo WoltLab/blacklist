@@ -11,7 +11,7 @@
   "author": "Alexander Ebert",
   "license": "LGPL-2.1-or-later",
   "dependencies": {
-    "csv-parse": "^4.16.3",
+    "csv-parse": "^5.4.0",
     "minimist": "^1.2.8",
     "node-fetch": "^2.6.7",
     "reflect-metadata": "^0.1.13",

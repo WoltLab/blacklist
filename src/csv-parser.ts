@@ -1,5 +1,5 @@
 import { createHash } from 'crypto';
-import * as csvParse from 'csv-parse';
+import { parse as csvParse } from 'csv-parse';
 import { Service } from 'typedi';
 
 @Service()
