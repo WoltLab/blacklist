@@ -19,7 +19,7 @@
     "typedi": "^0.10.0"
   },
   "devDependencies": {
-    "@types/minimist": "^1.2.2",
+    "@types/minimist": "^1.2.3",
     "@types/node-fetch": "^2.5.12",
     "@types/sqlite3": "^3.1.9",
     "tslint": "^6.1.3",
